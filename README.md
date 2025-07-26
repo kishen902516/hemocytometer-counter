@@ -1,5 +1,10 @@
 # 🔬 Hemocytometer Cell Counter
 
+**Professional online tool for laboratory cell counting, concentration calculation, and master mix preparation**
+
+[![Live Demo](https://img.shields.io/badge/Live-Demo-blue?style=for-the-badge)](https://thecellcounter.com)
+[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+
 A modern, user-friendly web application for counting cells using a hemocytometer. Built with React and TypeScript for accurate laboratory cell counting with real-time calculations.
 
 ## Features

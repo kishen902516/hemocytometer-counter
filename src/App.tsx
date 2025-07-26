@@ -68,12 +68,15 @@ function App() {
             {isDarkMode ? '☀️' : '🌙'}
           </button>
         </div>
-        <p>Professional cell counting and master mix preparation tool.</p>
+        <p>Professional cell counting and master mix preparation tool for laboratory researchers and technicians. Calculate cell concentrations, viability, and prepare accurate master mix volumes.</p>
         
-        <div className="main-tabs">
+        <nav className="main-tabs" role="tablist" aria-label="Main application features">
           <button 
             className={`tab-btn ${activeTab === 'counting' ? 'active' : ''}`}
             onClick={() => handleTabChange('counting')}
+            role="tab"
+            aria-selected={activeTab === 'counting'}
+            aria-controls="counting-panel"
           >
             🔬 Cell Counting
           </button>
@@ -81,10 +84,13 @@ function App() {
             className={`tab-btn ${activeTab === 'mastermix' ? 'active' : ''}`}
             onClick={() => handleTabChange('mastermix')}
             disabled={totalCells === 0}
+            role="tab"
+            aria-selected={activeTab === 'mastermix'}
+            aria-controls="mastermix-panel"
           >
             🧪 Master Mix Calculator
           </button>
-        </div>
+        </nav>
 
         {activeTab === 'counting' && (
           <div className="input-mode-toggle">
@@ -105,37 +111,53 @@ function App() {
       </header>
       
       <main>
-        {activeTab === 'counting' ? (
-          <>
-            {inputMode === 'grid' ? (
-              <ManualGridInput onCountChange={handleCountChange} />
-            ) : (
-              <TotalCellInput onCountChange={handleCountChange} />
-            )}
-            
-            <CellCalculations 
-              totalCells={totalCells} 
-              viableCells={viableCells}
-              selectedGrids={selectedGrids}
-              onParametersChange={(dilution) => {
-                setDilutionFactor(dilution)
-              }}
-            />
-            {totalCells > 0 && (
-              <ExportData 
-                totalCells={totalCells}
+        <section 
+          id="counting-panel" 
+          role="tabpanel" 
+          aria-labelledby="counting-tab"
+          hidden={activeTab !== 'counting'}
+        >
+          {activeTab === 'counting' && (
+            <>
+              {inputMode === 'grid' ? (
+                <ManualGridInput onCountChange={handleCountChange} />
+              ) : (
+                <TotalCellInput onCountChange={handleCountChange} />
+              )}
+              
+              <CellCalculations 
+                totalCells={totalCells} 
                 viableCells={viableCells}
-                dilutionFactor={dilutionFactor}
-                squaresCounted={selectedGrids}
+                selectedGrids={selectedGrids}
+                onParametersChange={(dilution) => {
+                  setDilutionFactor(dilution)
+                }}
               />
-            )}
-          </>
-        ) : (
-          <MasterMixCalculator 
-            cellConcentration={cellsPerML}
-            viableCellConcentration={viableCellsPerML}
-          />
-        )}
+              {totalCells > 0 && (
+                <ExportData 
+                  totalCells={totalCells}
+                  viableCells={viableCells}
+                  dilutionFactor={dilutionFactor}
+                  squaresCounted={selectedGrids}
+                />
+              )}
+            </>
+          )}
+        </section>
+        
+        <section 
+          id="mastermix-panel" 
+          role="tabpanel" 
+          aria-labelledby="mastermix-tab"
+          hidden={activeTab !== 'mastermix'}
+        >
+          {activeTab === 'mastermix' && (
+            <MasterMixCalculator 
+              cellConcentration={cellsPerML}
+              viableCellConcentration={viableCellsPerML}
+            />
+          )}
+        </section>
         </main>
         
         <footer className="app-footer">
