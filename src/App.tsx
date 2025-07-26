@@ -139,7 +139,7 @@ function App() {
         </main>
         
         <footer className="app-footer">
-          <p>Made with ❤️ by Kishen & Yuganthini</p>
+          <p>Made with ❤️ by Kishen & Dr.Yuganthini</p>
         </footer>
       </div>
     </div>
