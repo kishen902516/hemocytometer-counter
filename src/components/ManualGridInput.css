@@ -1,0 +1,374 @@
+.manual-input-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.input-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.input-header h2 {
+  color: #333;
+  margin: 0 0 10px 0;
+}
+
+.input-header p {
+  color: #666;
+  font-size: 14px;
+  margin: 0;
+}
+
+.grid-selection-controls {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.grid-selection-controls h3 {
+  margin: 0 0 15px 0;
+  color: #333;
+}
+
+.selection-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.selection-btn {
+  padding: 10px 20px;
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.selection-btn:hover {
+  background-color: #3367d6;
+}
+
+.selected-count {
+  color: #666;
+  font-size: 14px;
+  margin: 0;
+}
+
+.hemocytometer-visual {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 12px;
+  max-width: 650px;
+  margin: 0 auto;
+  aspect-ratio: 1;
+  padding: 20px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 15px;
+  border: 3px solid #dee2e6;
+}
+
+.grid-square {
+  border: 3px solid #ddd;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-height: 140px;
+  position: relative;
+  padding: 12px;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.grid-square.top-left {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.grid-square.top-right {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.grid-square.center {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.grid-square.bottom-left {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+.grid-square.bottom-right {
+  grid-column: 3;
+  grid-row: 3;
+}
+
+.grid-square.selected {
+  border-color: #4285f4;
+  background: linear-gradient(135deg, #f0f4ff 0%, #ffffff 100%);
+  box-shadow: 0 6px 20px rgba(66, 133, 244, 0.3);
+  transform: translateY(-2px);
+}
+
+.grid-square.unselected {
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  opacity: 0.6;
+  border-color: #dee2e6;
+}
+
+.grid-square.unselected:hover {
+  opacity: 1;
+  border-color: #4285f4;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(66, 133, 244, 0.2);
+}
+
+.grid-label {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 12px;
+  font-size: 13px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid #e9ecef;
+}
+
+.cell-inputs {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  justify-content: center;
+  align-items: stretch;
+  margin-top: 8px;
+}
+
+.input-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  max-width: 70px;
+}
+
+.input-group label {
+  font-size: 11px;
+  color: #666;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1.2;
+  margin-bottom: 2px;
+}
+
+.input-group input {
+  width: 100%;
+  max-width: 60px;
+  padding: 8px 4px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  background: white;
+  color: #333;
+  transition: all 0.2s ease;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #4285f4;
+  box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.1);
+}
+
+.click-to-select {
+  color: #999;
+  font-size: 12px;
+  text-align: center;
+  font-style: italic;
+}
+
+.summary-section {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+}
+
+.summary-card {
+  background-color: #f8f9fa;
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+}
+
+.summary-card h3 {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.summary-card .count {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+}
+
+.summary-card.viable {
+  border-color: #4285f4;
+  background-color: #f0f4ff;
+}
+
+.summary-card.viable .count {
+  color: #4285f4;
+}
+
+.summary-card.nonviable {
+  border-color: #ea4335;
+  background-color: #fff0f0;
+}
+
+.summary-card.nonviable .count {
+  color: #ea4335;
+}
+
+.summary-card.total {
+  border-color: #34a853;
+  background-color: #f0fff4;
+}
+
+.summary-card.total .count {
+  color: #34a853;
+}
+
+.action-buttons {
+  text-align: center;
+}
+
+.clear-button {
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.clear-button:hover {
+  background-color: #cc3333;
+}
+
+@media (max-width: 768px) {
+  .manual-input-container {
+    padding: 10px;
+  }
+  
+  .grid-layout {
+    gap: 8px;
+    max-width: 400px;
+    padding: 15px;
+  }
+  
+  .grid-square {
+    min-height: 100px;
+    padding: 8px;
+  }
+  
+  .grid-label {
+    font-size: 11px;
+    margin-bottom: 8px;
+    padding: 3px 6px;
+  }
+  
+  .cell-inputs {
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  
+  .input-group {
+    max-width: none;
+    width: 100%;
+  }
+  
+  .input-group input {
+    max-width: 50px;
+    font-size: 12px;
+    padding: 6px 4px;
+  }
+  
+  .selection-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .selection-btn {
+    width: 100%;
+    max-width: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-layout {
+    max-width: 320px;
+    gap: 6px;
+    padding: 12px;
+  }
+  
+  .grid-square {
+    min-height: 80px;
+    padding: 6px;
+  }
+  
+  .grid-label {
+    font-size: 10px;
+    margin-bottom: 6px;
+  }
+  
+  .input-group input {
+    width: 40px;
+    font-size: 11px;
+  }
+}

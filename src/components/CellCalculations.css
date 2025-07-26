@@ -1,0 +1,228 @@
+.calculations-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.calculations-container h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.parameters {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 30px;
+  justify-content: center;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.parameter-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 140px;
+}
+
+.parameter-group label {
+  font-weight: bold;
+  color: #555;
+  font-size: 14px;
+  margin-bottom: 4px;
+  text-align: center;
+}
+
+.parameter-group input,
+.parameter-group select {
+  padding: 12px 16px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  text-align: center;
+  min-width: 140px;
+  color: #333;
+  background-color: white;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.parameter-group input:focus,
+.parameter-group select:focus {
+  outline: none;
+  border-color: #4285f4;
+}
+
+.squares-display {
+  padding: 12px 16px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  min-width: 140px;
+  text-align: center;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.squares-value {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.squares-label {
+  font-size: 12px;
+  color: #666;
+  line-height: 1.2;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.result-card {
+  background-color: #f8f9fa;
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.result-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.result-card h3 {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.result-card .count {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.result-card .unit {
+  font-size: 12px;
+  color: #888;
+}
+
+.result-card.viable {
+  border-color: #4285f4;
+  background-color: #f0f4ff;
+}
+
+.result-card.viable .count {
+  color: #4285f4;
+}
+
+.result-card.nonviable {
+  border-color: #ea4335;
+  background-color: #fff0f0;
+}
+
+.result-card.nonviable .count {
+  color: #ea4335;
+}
+
+.result-card.viability {
+  border-color: #34a853;
+  background-color: #f0fff4;
+}
+
+.result-card.viability .count {
+  color: #34a853;
+}
+
+.result-card.concentration {
+  border-color: #ff9800;
+  background-color: #fff8f0;
+}
+
+.result-card.concentration .count {
+  color: #ff9800;
+}
+
+.result-card.viable-concentration {
+  border-color: #9c27b0;
+  background-color: #f8f0ff;
+}
+
+.result-card.viable-concentration .count {
+  color: #9c27b0;
+}
+
+.formula-info {
+  background-color: #f5f5f5;
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 4px solid #4285f4;
+}
+
+.formula-info h4 {
+  margin: 0 0 10px 0;
+  color: #333;
+}
+
+.formula-info p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .calculations-container {
+    margin: 10px;
+    padding: 15px;
+  }
+  
+  .parameters {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .parameter-group {
+    width: 100%;
+    max-width: 200px;
+  }
+  
+  .parameter-group input,
+  .parameter-group select,
+  .squares-display {
+    min-width: 100%;
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+  
+  .results-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+  }
+  
+  .result-card {
+    padding: 15px;
+  }
+  
+  .result-card .count {
+    font-size: 20px;
+  }
+}

@@ -1,0 +1,164 @@
+.hemocytometer-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.counting-mode {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.counting-mode label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.clear-button {
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.clear-button:hover {
+  background-color: #cc3333;
+}
+
+.hemocytometer-grid {
+  width: 400px;
+  height: 400px;
+  border: 3px solid #333;
+  position: relative;
+  background-color: #f8f8f8;
+  cursor: crosshair;
+  margin: 0 auto;
+  touch-action: none;
+}
+
+.grid-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.grid-line {
+  position: absolute;
+  background-color: #333;
+}
+
+.grid-line.vertical {
+  width: 2px;
+  height: 100%;
+}
+
+.grid-line.horizontal {
+  width: 100%;
+  height: 2px;
+}
+
+.corner-grid {
+  position: absolute;
+  width: 33.33%;
+  height: 33.33%;
+}
+
+.corner-grid.top-left {
+  top: 0;
+  left: 0;
+}
+
+.corner-grid.top-right {
+  top: 0;
+  right: 0;
+}
+
+.corner-grid.bottom-left {
+  bottom: 0;
+  left: 0;
+}
+
+.corner-grid.bottom-right {
+  bottom: 0;
+  right: 0;
+}
+
+.sub-grid-line {
+  position: absolute;
+  background-color: #666;
+}
+
+.sub-grid-line.vertical {
+  width: 1px;
+  height: 100%;
+}
+
+.sub-grid-line.horizontal {
+  width: 100%;
+  height: 1px;
+}
+
+.cell-marker {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.cell-marker.viable {
+  background-color: #4285f4;
+}
+
+.cell-marker.nonviable {
+  background-color: #ea4335;
+}
+
+.cell-marker:hover {
+  transform: scale(1.2);
+  transition: transform 0.1s;
+}
+
+@media (max-width: 768px) {
+  .hemocytometer-grid {
+    width: 350px;
+    height: 350px;
+  }
+  
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .counting-mode {
+    justify-content: center;
+  }
+  
+  .cell-marker {
+    width: 20px;
+    height: 20px;
+  }
+}
