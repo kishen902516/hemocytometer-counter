@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { trackMasterMixInputMode } from '../utils/analytics';
 import './MasterMixCalculator.css';
+
+type InputMode = 'hemocytometer' | 'manual';
 
 interface MasterMixCalculatorProps {
   cellConcentration: number; // cells/mL from hemocytometer counting
@@ -10,6 +13,12 @@ const MasterMixCalculator: React.FC<MasterMixCalculatorProps> = ({
   cellConcentration, 
   viableCellConcentration 
 }) => {
+  // Load saved input mode from localStorage or default to hemocytometer
+  const [inputMode, setInputMode] = useState<InputMode>(() => {
+    const saved = localStorage.getItem('masterMixInputMode');
+    return (saved === 'manual' || saved === 'hemocytometer') ? saved : 'hemocytometer';
+  });
+  const [manualViableCells, setManualViableCells] = useState<string>('');
   const [volumePerWell, setVolumePerWell] = useState<string>('100'); // μL
   const [cellsPerWell, setCellsPerWell] = useState<string>('10000'); // cells
   const [numberOfWells, setNumberOfWells] = useState<string>('24');
@@ -24,13 +33,24 @@ const MasterMixCalculator: React.FC<MasterMixCalculatorProps> = ({
     finalConcentration: 0
   });
 
+  // Save input mode to localStorage when it changes
+  useEffect(() => {
+    localStorage.setItem('masterMixInputMode', inputMode);
+  }, [inputMode]);
+
   useEffect(() => {
     const volPerWell = parseFloat(volumePerWell) || 0;
     const cellsPerWellNum = parseFloat(cellsPerWell) || 0;
     const numWells = parseFloat(numberOfWells) || 0;
     const extraWells = parseFloat(additionalWells) || 0;
     
-    const concentration = useViableCells ? viableCellConcentration : cellConcentration;
+    // Use manual concentration if in manual mode, otherwise use hemocytometer values
+    let concentration = 0;
+    if (inputMode === 'manual') {
+      concentration = parseFloat(manualViableCells) || 0;
+    } else {
+      concentration = useViableCells ? viableCellConcentration : cellConcentration;
+    }
     
     if (volPerWell > 0 && cellsPerWellNum > 0 && numWells > 0 && concentration > 0) {
       // Total wells including safety wells
@@ -62,7 +82,7 @@ const MasterMixCalculator: React.FC<MasterMixCalculatorProps> = ({
         finalConcentration: 0
       });
     }
-  }, [volumePerWell, cellsPerWell, numberOfWells, additionalWells, cellConcentration, viableCellConcentration, useViableCells]);
+  }, [volumePerWell, cellsPerWell, numberOfWells, additionalWells, cellConcentration, viableCellConcentration, useViableCells, inputMode, manualViableCells]);
 
   const handleInputChange = (setter: React.Dispatch<React.SetStateAction<string>>) => 
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,6 +92,22 @@ const MasterMixCalculator: React.FC<MasterMixCalculatorProps> = ({
       }
     };
 
+  const handleManualCellsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    // Allow scientific notation (e.g., 1.5e6)
+    const scientificNotationRegex = /^[0-9]*\.?[0-9]*([eE][+-]?[0-9]*)?$/;
+    if (value === '' || scientificNotationRegex.test(value)) {
+      setManualViableCells(value);
+    }
+  };
+
+  const validateManualInput = (): boolean => {
+    const value = parseFloat(manualViableCells);
+    return !isNaN(value) && value >= 1 && value <= 1e10;
+  };
+
+  const isManualInputInvalid = manualViableCells !== '' && !validateManualInput();
+
   return (
     <div className="mastermix-container">
       <div className="mastermix-header">
@@ -79,7 +115,61 @@ const MasterMixCalculator: React.FC<MasterMixCalculatorProps> = ({
         <p>Calculate required cell stock volume for preparing master mix</p>
       </div>
 
-      <div className="concentration-display">
+      <div className="input-mode-section">
+        <h3>📊 Concentration Input Method</h3>
+        <div className="input-mode-toggle">
+          <button 
+            className={`mode-btn ${inputMode === 'hemocytometer' ? 'active' : ''}`}
+            onClick={() => {
+              setInputMode('hemocytometer');
+              trackMasterMixInputMode('hemocytometer');
+            }}
+            aria-label="Use hemocytometer count"
+          >
+            Use Hemocytometer Count
+          </button>
+          <button 
+            className={`mode-btn ${inputMode === 'manual' ? 'active' : ''}`}
+            onClick={() => {
+              setInputMode('manual');
+              trackMasterMixInputMode('manual');
+            }}
+            aria-label="Manual entry"
+          >
+            Manual Entry
+          </button>
+        </div>
+
+        {inputMode === 'manual' && (
+          <div className="manual-input-container">
+            <label htmlFor="manual-viable-cells" className="manual-input-label">
+              Enter your viable cell concentration:
+            </label>
+            <div className="manual-input-wrapper">
+              <input
+                id="manual-viable-cells"
+                type="text"
+                inputMode="decimal"
+                value={manualViableCells}
+                onChange={handleManualCellsChange}
+                placeholder="e.g., 1.5e6"
+                className={`manual-input ${isManualInputInvalid ? 'error' : ''}`}
+                aria-label="Viable cells per mL"
+                aria-invalid={isManualInputInvalid}
+                aria-describedby={isManualInputInvalid ? "manual-input-error" : undefined}
+              />
+              <span className="input-unit">cells/mL</span>
+            </div>
+            {isManualInputInvalid && (
+              <span id="manual-input-error" className="error-message" role="alert">
+                Please enter a valid number between 1 and 1e10
+              </span>
+            )}
+          </div>
+        )}
+      </div>
+
+      <div className="concentration-display" style={{display: inputMode === 'hemocytometer' ? 'block' : 'none'}}>
         <div className="concentration-cards">
           <div className={`conc-card ${!useViableCells ? 'active' : ''}`}>
             <h3>Total Cell Concentration</h3>

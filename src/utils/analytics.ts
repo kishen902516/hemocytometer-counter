@@ -28,8 +28,15 @@ export const trackCellCounting = (inputMode: string, totalCells: number) => {
   trackEvent('cell_counting', 'user_interaction', `${inputMode}_mode_${totalCells}_cells`);
 };
 
-export const trackMasterMixCalculation = (cellConcentration: number) => {
-  trackEvent('master_mix_calculation', 'user_interaction', `concentration_${cellConcentration}`);
+export const trackMasterMixCalculation = (cellConcentration: number, inputMode?: string) => {
+  const label = inputMode 
+    ? `${inputMode}_mode_concentration_${cellConcentration}`
+    : `concentration_${cellConcentration}`;
+  trackEvent('master_mix_calculation', 'user_interaction', label);
+};
+
+export const trackMasterMixInputMode = (mode: 'hemocytometer' | 'manual') => {
+  trackEvent('master_mix_input_mode', 'user_interaction', mode);
 };
 
 export const trackTabSwitch = (tab: string) => {

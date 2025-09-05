@@ -24,6 +24,140 @@
   font-size: 14px;
 }
 
+/* Input Mode Section */
+.input-mode-section {
+  background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  border: 2px solid #cce5ff;
+}
+
+.input-mode-section h3 {
+  color: #333;
+  margin: 0 0 15px 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.input-mode-toggle {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.mode-btn {
+  flex: 1;
+  padding: 12px 20px;
+  border: 2px solid #dee2e6;
+  background: white;
+  color: #666;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.mode-btn:hover {
+  background: #f8f9fa;
+  border-color: #adb5bd;
+}
+
+.mode-btn.active {
+  background: #007AFF;
+  color: white;
+  border-color: #007AFF;
+  box-shadow: 0 2px 8px rgba(0, 122, 255, 0.3);
+}
+
+.mode-btn.active:hover {
+  background: #0056b3;
+  border-color: #0056b3;
+}
+
+/* Manual Input Container */
+.manual-input-container {
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.manual-input-label {
+  display: block;
+  margin-bottom: 8px;
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.manual-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.manual-input {
+  flex: 1;
+  padding: 12px;
+  border: 2px solid #dee2e6;
+  border-radius: 8px;
+  font-size: 16px;
+  background: white;
+  transition: all 0.3s ease;
+}
+
+.manual-input:focus {
+  outline: none;
+  border-color: #007AFF;
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+}
+
+.manual-input.error {
+  border-color: #FF3B30;
+  background: #fff5f5;
+}
+
+.manual-input.error:focus {
+  box-shadow: 0 0 0 3px rgba(255, 59, 48, 0.1);
+}
+
+.input-unit {
+  color: #666;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 2px solid #dee2e6;
+}
+
+.error-message {
+  display: block;
+  color: #FF3B30;
+  font-size: 12px;
+  margin-top: 6px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .concentration-display {
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   padding: 20px;
@@ -288,6 +422,28 @@
   .mastermix-container {
     margin: 10px;
     padding: 15px;
+  }
+  
+  .input-mode-toggle {
+    flex-direction: column;
+  }
+  
+  .mode-btn {
+    width: 100%;
+    min-height: 44px;
+  }
+  
+  .manual-input-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .manual-input {
+    width: 100%;
+  }
+  
+  .input-unit {
+    text-align: center;
   }
   
   .concentration-cards {
